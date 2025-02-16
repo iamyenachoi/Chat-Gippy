@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div id="welcome-message">
+        <h2>Welcome to Chat-Gippy!</h2>
+        <p>Here, you can ask anything, and Gippy will try to answer it for you. Go ahead, ask your question!</p>
+    </div>
+
+    <div id="chat-container">
+        <div id="chat-history"></div>
+        <form id="questionForm">
+            <input type="text" id="question" name="question" placeholder="Type your question here..." required>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <div id="gippy-container">
+        <img id="gippy-image" src="static/Gippy.png" alt="Gippy Image">
+        <p id="gippy-name">Gippy</p>
+    </div>
+
+    <script>
+        document.getElementById("questionForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+            var question = document.getElementById("question").value.trim(); // Get the value of the input field
+
+            if (question === "") return; // Check if the question is empty
+
+            // Display user question in the chat history
+            var chatHistory = document.getElementById("chat-history");
+            var userQuestion = document.createElement("div");
+            userQuestion.className = "user-question";
+            userQuestion.textContent = "You: " + question;
+            chatHistory.appendChild(userQuestion);
+
+            // Display loading message from Gippy
+            var loadingMessage = document.createElement("div");
+            loadingMessage.className = "gippy-answer";
+            loadingMessage.textContent = "Gippy: Thinking...";
+            chatHistory.appendChild(loadingMessage);
+
+            // Scroll to the bottom of the chat history
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+
+            // Clear the input field
+            document.getElementById("question").value = "";
+
+            // Send the question to the server
+            fetch("/ask", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ question: question })
+            })
+            .then(response => response.json()) 
+            .then(data => {
+                // Replace loading message with Gippy's answer
+                loadingMessage.textContent = "Gippy: " + data.answer;
+
+                // Scroll to the bottom of the chat history
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+            })
+            .catch(error => {
+                // Display error message if the request fails
+                loadingMessage.textContent = "Gippy: Error.";
+                console.error('Error:', error);
+            });
+        });
+    </script>        
+</body>
+</html>

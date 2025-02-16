@@ -1,0 +1,125 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3dfe6;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #6b2737;
+    margin-top: 50px;
+}
+
+#welcome-message {
+    text-align: center;
+    color: #6b2737; /* 글자색 */
+    margin-top: 50px;
+}
+
+#welcome-message h2 {
+    font-size: 32px;
+    color: #6b2737; /* 원하는 색상으로 변경 */
+    margin-bottom: 10px;
+}
+
+#welcome-message p {
+    font-size: 18px;
+    color: #444; /* 좀 더 부드러운 색상 */
+}
+
+#chat-container {
+    width: 500px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    max-height: 500px;
+}
+
+form {
+    margin-top: 20px;
+    text-align: center;
+}
+
+input[type="text"] {
+    width: calc(100% - 80px);
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #6b2737;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+input[type="text"]:focus {
+    border-color: #a84556;
+    outline: none;
+}
+
+button[type="submit"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #6b2737;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #a84556;
+}
+
+#gippy-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#gippy-image {
+    display: block;
+    margin: 20px auto;
+    width: 150px;
+    border-radius: 50%;
+}
+
+#gippy-name {
+    text-align: center;
+    color: #6b2737;
+    font-size: 24px;
+}
+
+#chat-history {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.user-question, .gippy-answer {
+    max-width: 75%;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+.user-question {
+    align-self: flex-start;
+    background-color: #e6e6e6;
+    border-top-left-radius: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 0;
+}
+
+.gippy-answer {
+    align-self: flex-end;
+    background-color: #6b2737;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 10px;
+}
